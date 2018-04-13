@@ -1,13 +1,13 @@
 from io_utils import load_input, print_result
 
-def pred2succ(pred):
-	succ = [[] for i in pred]
-	for i, tmp in enumerate(pred):
-		for j in tmp:
-			succ[j].append(i)
-	return succ
+from asap import pred2succ, asap
+from alap import alap
 
-def asap(n, m, optype, rest, pred):
+def grid(n, m, optype, rest, pred):
+	lb = asap(n, m, optype, rest, pred)
+	ub = alap(n, m, optype, rest, pred)
+	priority = [j - i for i, j in zip(lb, ub)]
+
 	result = [None] * n
 	cur = 0
 	succ = pred2succ(pred)
@@ -23,6 +23,9 @@ def asap(n, m, optype, rest, pred):
 		cur_use = [0] * m
 		quse = []
 		qdelay = []
+
+		q = sorted(q, key=lambda x:priority[x])
+
 		for idx in q:
 			opt = optype[idx]
 			if cur_use[opt] < rest[opt]:
@@ -44,8 +47,8 @@ def asap(n, m, optype, rest, pred):
 
 def main(infile, outfile):
 	n, m, optype, rest, pred = load_input(infile)
-	result = asap(n, m, optype, rest, pred)
+	result = grid(n, m, optype, rest, pred)
 	print_result(result, outfile)
 
 if __name__ == "__main__":
-	main("input.txt", "output_asap.txt")
+	main("input.txt", "output_grid.txt")

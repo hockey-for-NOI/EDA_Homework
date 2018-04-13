@@ -1,16 +1,13 @@
 from io_utils import load_input, print_result
 
-def pred2succ(pred):
-	succ = [[] for i in pred]
-	for i, tmp in enumerate(pred):
-		for j in tmp:
-			succ[j].append(i)
-	return succ
+from asap import pred2succ
 
-def asap(n, m, optype, rest, pred):
+def alap(n, m, optype, rest, pred):
 	result = [None] * n
 	cur = 0
 	succ = pred2succ(pred)
+
+	pred, succ = succ, pred
 
 	count = [len(i) for i in pred]
 
@@ -40,12 +37,12 @@ def asap(n, m, optype, rest, pred):
 		
 		cur += 1
 		
-	return result
+	return [cur - 1 - i for i in result]
 
 def main(infile, outfile):
 	n, m, optype, rest, pred = load_input(infile)
-	result = asap(n, m, optype, rest, pred)
+	result = alap(n, m, optype, rest, pred)
 	print_result(result, outfile)
 
 if __name__ == "__main__":
-	main("input.txt", "output_asap.txt")
+	main("input.txt", "output_alap.txt")
