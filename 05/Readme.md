@@ -27,3 +27,15 @@ line 1: Integer n, m, k. N and m are The number of parts in set A and B, and k i
 line 2~n+1: A string contains '0', '1' or 'X'. The length is equal to k. This describes a part in set A.
 
 line n+2~n+m+1: A string contains '0', '1' or 'X'. The length is equal to k. This describes a part in set B.
+
+Output: logic\_union.out
+
+line 1: Integer r. The number of parts in union.
+
+line 2~r+1: A string contains '0', '1' or 'X'. The length is equal to k (though k is not specified in output). This describes a part in set A union B.
+
+Output: logic\_intersect.out
+
+line 1: Integer r. The number of parts in intersect.
+
+line 2~r+1: A string contains '0', '1' or 'X'. The length is equal to k (though k is not specified in output). This describes a part in set A intersect B.
